@@ -102,7 +102,6 @@ const updateLeaveStatus = async (req, res) => {
                 });
             }
 
-            // Atomic balance deduction using $inc to avoid read-modify-write race
             await User.findByIdAndUpdate(user._id, {
                 $inc: { leaveBalance: -leaveRequest.duration, usedLeave: leaveRequest.duration }
             });
@@ -132,7 +131,7 @@ const getMyLeaves = async (req, res) => {
 
 const getAllLeaves = async (req, res) => {
     try {
-        const { status } = req.query; // optional filter: ?status=Pending
+        const { status } = req.query; 
         const filter = status ? { status } : {};
 
         const leaves = await LeaveRequest.find(filter)
