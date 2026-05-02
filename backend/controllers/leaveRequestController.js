@@ -87,7 +87,6 @@ const updateLeaveStatus = async (req, res) => {
         if (status === 'Approved') {
             const user = await User.findById(leaveRequest.userId);
 
-            // If user is missing or balance insufficient → rollback Step 1
             if (!user || leaveRequest.duration > user.leaveBalance) {
                 await LeaveRequest.findByIdAndUpdate(leaveRequest._id, {
                     status: 'Pending',
