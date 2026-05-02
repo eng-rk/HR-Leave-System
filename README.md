@@ -77,7 +77,7 @@ HR-Leave-System/
 
 ---
 
-## ⚙️ Setup & Installation
+##  Setup & Installation
 
 ### Prerequisites
 - Node.js v18+
@@ -138,7 +138,7 @@ Authorization: Bearer <your_jwt_token>
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### Auth Routes — `/api/auth`
 
