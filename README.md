@@ -4,7 +4,7 @@ A full-stack HR Leave Management System built with **React + Node.js + Express +
 
 ---
 
-## 👥 Team Members
+##  Team Members
 
 | Name |
 |------|
@@ -15,7 +15,7 @@ A full-stack HR Leave Management System built with **React + Node.js + Express +
 
 ---
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 ### Frontend
 | Tech | Purpose |
@@ -38,7 +38,7 @@ A full-stack HR Leave Management System built with **React + Node.js + Express +
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 HR-Leave-System/
@@ -121,7 +121,7 @@ The backend API will run on: **http://localhost:8000**
 
 ---
 
-## 🔐 Authentication
+##  Authentication
 
 All protected routes require a Bearer token in the `Authorization` header:
 ```
@@ -194,7 +194,7 @@ Authorization: Bearer <your_jwt_token>
   "endDate": "2026-05-14"
 }
 ```
-> ⚠️ `userId` is automatically extracted from the JWT token. **Never send it in the request body.**
+>  `userId` is automatically extracted from the JWT token. **Never send it in the request body.**
 
 #### HR: Approve / Reject
 ```json
@@ -216,7 +216,7 @@ GET /api/leave-requests?status=Approved
 
 ---
 
-## 🔄 Leave Request Workflow
+##  Leave Request Workflow
 
 ```
 Employee submits request
@@ -233,16 +233,16 @@ Employee submits request
 ```
 
 ### Business Rules
-- ✅ `startDate` must be today or in the future
-- ✅ `startDate` must be before or equal to `endDate`
-- ✅ Requested duration must not exceed available `leaveBalance`
-- ✅ Balance is deducted **only on HR Approval**, never on creation
-- ✅ Each leave request can only be processed **once** (Pending → Approved/Rejected, no re-processing)
-- ✅ Atomic database operations prevent race conditions with concurrent HR approvals
+-  `startDate` must be today or in the future
+-  `startDate` must be before or equal to `endDate`
+-  Requested duration must not exceed available `leaveBalance`
+-  Balance is deducted **only on HR Approval**, never on creation
+-  Each leave request can only be processed **once** (Pending → Approved/Rejected, no re-processing)
+-  Atomic database operations prevent race conditions with concurrent HR approvals
 
 ---
 
-## 👤 User Model
+##  User Model
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
@@ -255,7 +255,7 @@ Employee submits request
 
 ---
 
-## 📋 LeaveRequest Model
+##  LeaveRequest Model
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
@@ -270,17 +270,17 @@ Employee submits request
 
 ---
 
-## 🔒 Security Features
+##  Security Features
 
-- 🔐 Passwords hashed with **Bcrypt** (10 salt rounds)
-- 🎫 **JWT tokens** expire in 6 hours
-- 🛡️ `userId` is always taken from the JWT token — never trusted from client
-- 🚫 Role-based middleware blocks unauthorized access
-- ✅ Input validation with **Joi** on all auth endpoints
+-  Passwords hashed with **Bcrypt** (10 salt rounds)
+-  **JWT tokens** expire in 6 hours
+-  `userId` is always taken from the JWT token — never trusted from client
+-  Role-based middleware blocks unauthorized access
+-  Input validation with **Joi** on all auth endpoints
 
 ---
 
-## 📝 Environment Variables
+##  Environment Variables
 
 ```env
 PORT=8000
@@ -290,7 +290,7 @@ MONGO_URL=mongodb://localhost:27017/leave_management
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create your feature branch: `git checkout -b feature/your-feature`
