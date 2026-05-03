@@ -1,10 +1,8 @@
 const LeaveRequest = require('../Models/LeaveRequest');
 const User = require('../Models/User');
 
-// ─── POST /api/leave-requests ─────────────────────────────────────────────────
 const createLeaveRequest = async (req, res) => {
     try {
-        // Security: reject any client-provided userId
         if (req.body.userId || req.body.UserId) {
             return res.status(403).json({ msg: 'Security Violation: userId cannot be provided by the client' });
         }
@@ -46,7 +44,6 @@ const createLeaveRequest = async (req, res) => {
             });
         }
 
-        // Create request — status defaults to "Pending", NO balance deduction here
         const leaveRequest = await LeaveRequest.create({
             type,
             startDate: start,
@@ -66,7 +63,6 @@ const createLeaveRequest = async (req, res) => {
     }
 };
 
-// ─── PUT /api/leave-requests/:id/status  (HR only) ────────────────────────────
 const updateLeaveStatus = async (req, res) => {
     try {
         const { status } = req.body;
@@ -76,9 +72,6 @@ const updateLeaveStatus = async (req, res) => {
             return res.status(400).json({ msg: 'status must be either "Approved" or "Rejected"' });
         }
 
-        // ── Step 1: Atomic state transition (Pending → Approved/Rejected) ─────────
-        // findOneAndUpdate with status: 'Pending' as filter guarantees only ONE
-        // concurrent HR request can succeed. All others will find non-Pending status.
         const leaveRequest = await LeaveRequest.findOneAndUpdate(
             { _id: req.params.id, status: 'Pending' },
             { status, approvedBy: hrId, processedAt: new Date() },
@@ -91,11 +84,9 @@ const updateLeaveStatus = async (req, res) => {
             return res.status(400).json({ msg: `Request is already ${existing.status.toLowerCase()}` });
         }
 
-        // ── Step 2: Balance deduction (only if Approved) ──────────────────────────
         if (status === 'Approved') {
             const user = await User.findById(leaveRequest.userId);
 
-            // If user is missing or balance insufficient → rollback Step 1
             if (!user || leaveRequest.duration > user.leaveBalance) {
                 await LeaveRequest.findByIdAndUpdate(leaveRequest._id, {
                     status: 'Pending',
@@ -111,7 +102,6 @@ const updateLeaveStatus = async (req, res) => {
                 });
             }
 
-            // Atomic balance deduction using $inc to avoid read-modify-write race
             await User.findByIdAndUpdate(user._id, {
                 $inc: { leaveBalance: -leaveRequest.duration, usedLeave: leaveRequest.duration }
             });
@@ -128,7 +118,6 @@ const updateLeaveStatus = async (req, res) => {
     }
 };
 
-// ─── GET /api/leave-requests/my  (Employee: view own requests) ───────────────
 const getMyLeaves = async (req, res) => {
     try {
         const leaves = await LeaveRequest.find({ userId: req.user.id })
@@ -140,10 +129,9 @@ const getMyLeaves = async (req, res) => {
     }
 };
 
-// ─── GET /api/leave-requests  (HR: view all requests) ─────────────────────────
 const getAllLeaves = async (req, res) => {
     try {
-        const { status } = req.query; // optional filter: ?status=Pending
+        const { status } = req.query; 
         const filter = status ? { status } : {};
 
         const leaves = await LeaveRequest.find(filter)

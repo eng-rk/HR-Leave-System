@@ -27,10 +27,6 @@ export default function LoginPage() {
               <label>Password</label>
               <input type="password" placeholder="Enter your password" />
             </div>
-
-            <div className={styles["forgot-password-link"]}>
-              <Link to="/forgot-password">Forgot password?</Link>
-            </div>
             
             <div className={styles["submit-login"]}>
               <button type="submit">Sign In</button>

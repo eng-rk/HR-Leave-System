@@ -4,6 +4,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import ApplyForm from "./Components/ApplyForm/ApplyForm";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Layout from "./pages/layout"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/form" element={<ApplyForm />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+        <Route path="/Layout" element={<Layout />} />
     </Routes>
   );
 }

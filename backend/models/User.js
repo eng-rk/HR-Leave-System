@@ -31,14 +31,7 @@ const userSchema = new mongoose.Schema({
     resetTokenExpire: Date,
 }, {
     timestamps: true,
-    toJSON: {
-        transform(doc, ret) {
-            delete ret.__v;
-            delete ret.password;
-            delete ret.resetToken;
-            delete ret.resetTokenExpire;
-            return ret;
-        }
+    
     }
 });
 
