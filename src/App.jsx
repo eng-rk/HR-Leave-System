@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import RegisterPage from "./pages/auth/RegisterPage";
 import LoginPage from "./pages/auth/LoginPage";
 import ApplyForm from "./Components/ApplyForm/ApplyForm";
@@ -8,13 +8,26 @@ import Layout from "./pages/layout"
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/login" /> } />
+   
+ 
+  <Routes>
+
+    <Route path="/" element={<Navigate to="/login" />} />
+
+    <Route path="/login" element={<LoginPage />} />
+    <Route path="/register" element={<RegisterPage />} />
+
+      <Route path="/layout" element={<Layout />} />
       <Route path="/form" element={<ApplyForm />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-        <Route path="/Layout" element={<Layout />} />
-    </Routes>
+
+  </Routes>
+
+
+    
+
+   
+      
+
   );
 }
 

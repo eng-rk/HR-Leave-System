@@ -126,5 +126,13 @@
 
 
 .icon2 {
-   
+   width: 30px;
+    height: 30px;
+    margin: 0 auto 15px auto;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #2563eb, #10b981);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
